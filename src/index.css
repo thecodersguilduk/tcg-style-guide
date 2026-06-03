@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colours — TCG Style Sheet 2026 */
+  --color-navy: #3A405A;
+  --color-sand: #F2D0A4;
+  --color-red: #E4200A;
+  --color-teal: #218380;
+
+  /* Lighter/darker tints for hover states & surfaces */
+  --color-navy-light: #4A5170;
+  --color-navy-dark: #2A3046;
+  --color-sand-light: #F7E2C4;
+  --color-sand-dark: #E0B97E;
+  --color-red-light: #F04A30;
+  --color-red-dark: #C01A08;
+  --color-teal-light: #2A9E9B;
+  --color-teal-dark: #1A6966;
+
+  /* Font family */
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Base resets */
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  color: var(--color-navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
