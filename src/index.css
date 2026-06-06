@@ -1,21 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colours — TCG Style Sheet 2026 */
+  /* Brand Colours — TCG Style Sheet 2026
+   * Elementor global colour mapping:
+   *   --e-global-color-primary:   #3A405A (navy)
+   *   --e-global-color-secondary: #F2D0A4 (sand)
+   *   --e-global-color-text:      #3A405A (navy — same as primary)
+   *   --e-global-color-accent:    #E4200A (red)
+   *   --e-global-color-accent2:   #218380 (teal)
+   */
   --color-navy: #3A405A;
   --color-sand: #F2D0A4;
   --color-red: #E4200A;
   --color-teal: #218380;
-
-  /* Lighter/darker tints for hover states & surfaces */
-  --color-navy-light: #4A5170;
-  --color-navy-dark: #2A3046;
-  --color-sand-light: #F7E2C4;
-  --color-sand-dark: #E0B97E;
-  --color-red-light: #F04A30;
-  --color-red-dark: #C01A08;
-  --color-teal-light: #2A9E9B;
-  --color-teal-dark: #1A6966;
 
   /* Font family */
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
@@ -28,4 +25,26 @@ body {
   color: var(--color-navy);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ * Typography scale from the live site:
+ *   Primary (headings):    5vw,  weight 600, line-height 1.1em
+ *   Secondary (subheads):  3vw,  weight 600, line-height 1.1em
+ *   Text (body):           17px, weight 400, line-height 1.3em
+ *   Accent (buttons):      20px, weight 600, line-height 1em
+ */
+
+/* Brand shape rotation animations */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spin-cw {
+  animation: spin 20s linear infinite;
+}
+
+.spin-ccw {
+  animation: spin 20s linear infinite reverse;
 }

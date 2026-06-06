@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Button from './Button';
 
 /**
- * NavBar — Navy background, sand links, red CTA.
+ * NavBar — White/transparent background, navy text links, red CTA.
+ * Real values from site CSS: nav links #3A405A, hover #E4200A.
  * Responsive: collapses to hamburger on mobile.
  */
 
@@ -16,21 +17,22 @@ const defaultLinks = [
 
 export default function NavBar({
   links = defaultLinks,
-  ctaLabel = 'Get in Touch',
+  ctaLabel = 'Contact Us',
   ctaHref = '#contact',
 }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="bg-navy sticky top-0 z-50">
+    <nav className="bg-white/95 backdrop-blur sticky top-0 z-50 border-b border-navy/10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo / Wordmark */}
-          <a href="/" className="flex items-center gap-2 shrink-0" aria-label="Home">
-            <LogoMark className="h-8 w-8 text-sand" />
-            <span className="hidden sm:block text-sand font-semibold text-lg leading-tight">
-              The<br />Coders Guild
-            </span>
+        <div className="flex h-20 items-center justify-between">
+          {/* Real logo SVG */}
+          <a href="/" className="shrink-0" aria-label="Home">
+            <img
+              src="/assets/logo-full.svg"
+              alt="The Coders Guild"
+              className="h-12 w-auto"
+            />
           </a>
 
           {/* Desktop links */}
@@ -39,19 +41,19 @@ export default function NavBar({
               <a
                 key={label}
                 href={href}
-                className="text-sand text-sm font-normal hover:text-sand-light transition-colors"
+                className="text-navy text-sm font-normal hover:text-red transition-colors duration-200"
               >
                 {label}
               </a>
             ))}
-            <Button variant="cta" size="sm" onClick={() => window.location.href = ctaHref}>
+            <Button variant="cta" onClick={() => window.location.href = ctaHref}>
               {ctaLabel}
             </Button>
           </div>
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden text-sand p-2"
+            className="md:hidden text-navy p-2"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -71,45 +73,21 @@ export default function NavBar({
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-sand/20 px-4 pb-4 pt-2 flex flex-col gap-2">
+        <div className="md:hidden bg-white rounded-b-[1rem] mt-0 px-4 pb-4 pt-2 flex flex-col gap-2" style={{ paddingLeft: '27px' }}>
           {links.map(({ label, href }) => (
             <a
               key={label}
               href={href}
-              className="text-sand text-sm py-2 hover:text-sand-light transition-colors"
+              className="text-navy text-sm py-2 hover:text-red transition-colors duration-200"
             >
               {label}
             </a>
           ))}
-          <Button variant="cta" size="sm" className="mt-2 self-start" onClick={() => window.location.href = ctaHref}>
+          <Button variant="cta" className="mt-2 self-start" onClick={() => window.location.href = ctaHref}>
             {ctaLabel}
           </Button>
         </div>
       )}
     </nav>
-  );
-}
-
-/** Simplified TCG diamond/cross logo mark as inline SVG */
-function LogoMark({ className }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 64 64"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/* Top-left petal */}
-      <circle cx="18" cy="18" r="10" />
-      {/* Top-right petal */}
-      <circle cx="46" cy="18" r="10" />
-      {/* Bottom-left petal */}
-      <circle cx="18" cy="46" r="10" />
-      {/* Bottom-right petal */}
-      <circle cx="46" cy="46" r="10" />
-      {/* Centre diamond */}
-      <rect x="20" y="20" width="24" height="24" rx="2" transform="rotate(45 32 32)" />
-    </svg>
   );
 }

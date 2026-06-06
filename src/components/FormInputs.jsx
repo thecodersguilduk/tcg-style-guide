@@ -10,7 +10,7 @@ const inputBase =
   'w-full rounded-lg border border-navy/30 bg-white px-4 py-2.5 text-sm text-navy ' +
   'placeholder:text-navy/40 font-light ' +
   'focus:border-teal focus:ring-2 focus:ring-teal/30 focus:outline-none ' +
-  'disabled:bg-sand-light disabled:opacity-60';
+  'disabled:bg-sand/30 disabled:opacity-60';
 
 export function TextInput({ label, id, error, className = '', ...props }) {
   return (

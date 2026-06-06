@@ -1,53 +1,43 @@
 import React from 'react';
 
 /**
- * Button — 6 variants, pill shape per TCG Style Sheet 2026 social designs.
+ * Button — 3 variants matching the live TCG website.
  *
  * Variants:
- *   primary        Navy bg, sand text (default brand action)
- *   secondary      Sand bg, navy text (light surfaces)
- *   cta            Red bg, white text (call-to-action / urgent)
- *   teal           Teal bg, sand text (courses / positive)
- *   outlineNavy    Transparent, navy border + navy text (light bgs)
- *   outlineSand    Transparent, sand border + sand text (dark bgs)
+ *   cta           Red bg, white text (primary CTA — "Contact Us")
+ *   outline       Transparent, white border + text (secondary on dark sections)
+ *   outlineNavy   Transparent, navy border + navy text (secondary on light sections)
+ *
+ * Real CSS values from site: border-radius 40px, padding 13px 24px 15px 27px,
+ * font-weight 500, font-size 20px, transition 0.2s.
  */
 
-const base =
-  'inline-flex items-center justify-center rounded-full font-semibold ' +
-  'transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ' +
-  'disabled:opacity-50 disabled:pointer-events-none cursor-pointer';
-
-const sizes = {
-  sm: 'px-5 py-2 text-sm',
-  md: 'px-7 py-2.5 text-base',
-  lg: 'px-9 py-3.5 text-lg',
-};
-
 const variants = {
-  primary:
-    'bg-navy text-sand hover:bg-navy-light focus-visible:outline-navy',
-  secondary:
-    'bg-sand text-navy hover:bg-sand-light focus-visible:outline-sand',
   cta:
-    'bg-red text-white hover:bg-red-light focus-visible:outline-red',
-  teal:
-    'bg-teal text-sand hover:bg-teal-light focus-visible:outline-teal',
+    'bg-red text-white hover:bg-red/90 focus-visible:outline-red',
+  outline:
+    'border-2 border-white text-white hover:border-navy hover:text-navy hover:bg-white focus-visible:outline-white',
   outlineNavy:
-    'border-2 border-navy text-navy hover:bg-navy hover:text-sand focus-visible:outline-navy',
-  outlineSand:
-    'border-2 border-sand text-sand hover:bg-sand hover:text-navy focus-visible:outline-sand',
+    'border-2 border-navy text-navy hover:border-red hover:text-red focus-visible:outline-navy',
 };
 
 export default function Button({
-  variant = 'primary',
-  size = 'md',
+  variant = 'cta',
   children,
   className = '',
   ...props
 }) {
   return (
     <button
-      className={`${base} ${sizes[size]} ${variants[variant]} ${className}`}
+      className={[
+        'inline-flex items-center justify-center font-medium text-[20px] leading-none',
+        'transition-colors duration-200 cursor-pointer',
+        'focus-visible:outline-2 focus-visible:outline-offset-2',
+        'disabled:opacity-50 disabled:pointer-events-none',
+        variants[variant],
+        className,
+      ].join(' ')}
+      style={{ borderRadius: '40px', padding: '13px 24px 15px 27px' }}
       {...props}
     >
       {children}

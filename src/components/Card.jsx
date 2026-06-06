@@ -3,14 +3,12 @@ import React from 'react';
 /**
  * Card — 4 variants matching TCG social media card styles.
  *
- * Variants:
- *   navy   Dark card (navy bg, sand text) — default / feature
- *   sand   Light card (sand bg, navy text) — testimonial / quote
- *   red    Urgent card (red bg, white text) — hiring / alerts
- *   teal   Info card (teal bg, sand text) — courses / highlights
+ * Real CSS values from site:
+ *   border-radius: 1rem
+ *   shadow: rgba(0, 0, 0, 0.08) 0px 0px 26px 0px
+ *   hover: translateY(-2px)
+ *   padding: 40px
  */
-
-const base = 'rounded-2xl overflow-hidden';
 
 const variants = {
   navy: 'bg-navy text-sand',
@@ -30,7 +28,13 @@ export default function Card({
   className = '',
 }) {
   return (
-    <div className={`${base} ${variants[variant]} ${className}`}>
+    <div
+      className={`overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 ${variants[variant]} ${className}`}
+      style={{
+        borderRadius: '1rem',
+        boxShadow: 'rgba(0, 0, 0, 0.08) 0px 0px 26px 0px',
+      }}
+    >
       {image && (
         <img
           src={image}
@@ -39,7 +43,7 @@ export default function Card({
         />
       )}
 
-      <div className="p-6 flex flex-col gap-3">
+      <div className="flex flex-col gap-3" style={{ padding: '40px' }}>
         {tag && (
           <span className="text-xs font-semibold uppercase tracking-wider opacity-80">
             {tag}

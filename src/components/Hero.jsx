@@ -2,9 +2,9 @@ import React from 'react';
 import Button from './Button';
 
 /**
- * Hero — Full-width section, navy background with decorative brand shapes.
- * Follows the presentation title-slide pattern from TCG Style Sheet 2026:
- * large Poppins Semibold heading, lighter subheading, and a CTA pill button.
+ * Hero — Full-width section with real brand shapes rotating continuously.
+ * Shapes extracted from the live site MHTML — three distinct SVG forms
+ * used as floating decorative background elements.
  */
 
 export default function Hero({
@@ -17,38 +17,74 @@ export default function Hero({
 }) {
   return (
     <section className="relative bg-navy overflow-hidden">
-      {/* Decorative brand shapes — diamond + circle outlines from cover page */}
+      {/* Real brand shapes — rotating decorative elements from site */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Rotated diamond */}
-        <div
-          className="absolute border-2 border-sand/20"
+        {/* Teal square — top right */}
+        <img
+          src="/assets/shape-square.svg"
+          alt=""
+          className="absolute spin-cw text-teal"
           style={{
-            width: '500px',
-            height: '500px',
-            top: '10%',
+            width: '80px',
+            height: '80px',
+            top: '15%',
+            right: '12%',
+            filter: 'brightness(0) saturate(100%) invert(37%) sepia(60%) saturate(500%) hue-rotate(145deg)',
+          }}
+        />
+        {/* Red arch — top right area */}
+        <img
+          src="/assets/shape-arch.svg"
+          alt=""
+          className="absolute spin-ccw"
+          style={{
+            width: '200px',
+            height: '200px',
+            top: '5%',
             right: '5%',
-            transform: 'rotate(45deg)',
+            filter: 'brightness(0) saturate(100%) invert(18%) sepia(96%) saturate(5574%) hue-rotate(4deg) brightness(95%)',
           }}
         />
-        {/* Circle */}
-        <div
-          className="absolute rounded-full border-2 border-sand/20"
-          style={{
-            width: '400px',
-            height: '400px',
-            top: '20%',
-            right: '-5%',
-          }}
-        />
-        {/* Smaller diamond */}
-        <div
-          className="absolute border-2 border-sand/10"
+        {/* Sand semicircle — bottom right */}
+        <img
+          src="/assets/shape-semicircle.svg"
+          alt=""
+          className="absolute spin-cw"
           style={{
             width: '300px',
             height: '300px',
-            bottom: '-10%',
-            right: '15%',
-            transform: 'rotate(45deg)',
+            bottom: '-5%',
+            right: '10%',
+            opacity: 0.3,
+            filter: 'brightness(0) saturate(100%) invert(82%) sepia(30%) saturate(500%) hue-rotate(345deg)',
+          }}
+        />
+        {/* Sand square — middle left */}
+        <img
+          src="/assets/shape-square.svg"
+          alt=""
+          className="absolute spin-ccw"
+          style={{
+            width: '50px',
+            height: '50px',
+            top: '60%',
+            left: '8%',
+            opacity: 0.4,
+            filter: 'brightness(0) saturate(100%) invert(82%) sepia(30%) saturate(500%) hue-rotate(345deg)',
+          }}
+        />
+        {/* Teal arch — bottom left */}
+        <img
+          src="/assets/shape-arch.svg"
+          alt=""
+          className="absolute spin-cw"
+          style={{
+            width: '120px',
+            height: '120px',
+            bottom: '10%',
+            left: '3%',
+            opacity: 0.25,
+            filter: 'brightness(0) saturate(100%) invert(37%) sepia(60%) saturate(500%) hue-rotate(145deg)',
           }}
         />
       </div>
@@ -66,11 +102,11 @@ export default function Hero({
           )}
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button variant="cta" size="lg" onClick={() => window.location.href = ctaHref}>
+            <Button variant="cta" onClick={() => window.location.href = ctaHref}>
               {ctaLabel}
             </Button>
             {secondaryLabel && (
-              <Button variant="outlineSand" size="lg" onClick={() => window.location.href = (secondaryHref || '#')}>
+              <Button variant="outline" onClick={() => window.location.href = (secondaryHref || '#')}>
                 {secondaryLabel}
               </Button>
             )}
