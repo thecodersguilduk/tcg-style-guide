@@ -27,7 +27,12 @@ Defined in `src/index.css` as CSS custom properties:
 
 ## Logo rules — IMPORTANT
 
-Only 4 background colour × 3 logo type combinations are approved. Do not add others.
+Two approved sets:
+
+1. **Background combinations** — 4 background colours × 3 logo types. Do not add other
+   background/type combinations beyond these.
+2. **Logo treatments** — the full logo on a transparent background, in navy, sand, black, or
+   white fill. These are separate from the background grid above and are also approved.
 
 ### 3 logo types per colour theme
 | Type | Description | Asset prefix |
@@ -52,8 +57,14 @@ wordmark-dark.svg  wordmark-light.svg  wordmark-red.svg  wordmark-green.svg
 ```
 Transparent-background versions (for use in UI contexts):
 ```
-icon-dark-transparent.svg   icon-light-transparent.svg
-logo-dark-transparent.svg   logo-light-transparent.svg
+icon-dark-transparent.svg    icon-light-transparent.svg
+icon-dark-outline.svg        icon-light-outline.svg
+logo-light-transparent.svg
+```
+Logo treatments — full logo, transparent background, single fill colour:
+```
+logo-navy-transparent.svg  logo-sand-transparent.svg
+logo-black-transparent.svg logo-white-transparent.svg
 ```
 
 ## Key files
