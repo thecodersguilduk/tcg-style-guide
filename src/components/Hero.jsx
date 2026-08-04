@@ -45,9 +45,9 @@ export default function Hero({
             filter: 'brightness(0) saturate(100%) invert(18%) sepia(96%) saturate(5574%) hue-rotate(4deg) brightness(95%)',
           }}
         />
-        {/* Sand semicircle — bottom right */}
+        {/* Sand circle — bottom right */}
         <img
-          src="/assets/shape-semicircle.svg"
+          src="/assets/shape-circle.svg"
           alt=""
           className="absolute spin-cw"
           style={{

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavBar, Hero, Button, Card, TextInput, TextArea, Select, Checkbox } from '../components';
 
 const colours = [
@@ -7,6 +7,42 @@ const colours = [
   { name: 'Red', hex: '#E4200A', token: 'red', className: 'bg-red' },
   { name: 'Teal', hex: '#218380', token: 'teal', className: 'bg-teal' },
 ];
+
+const logoTreatments = [
+  { name: 'Navy', suffix: 'navy', swatch: 'bg-white' },
+  { name: 'Sand', suffix: 'sand', swatch: 'bg-white' },
+  { name: 'Black', suffix: 'black', swatch: 'bg-white' },
+  { name: 'White', suffix: 'white', swatch: 'bg-navy' },
+];
+
+function ColourSwatch({ name, hex, token, className }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(hex);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      // clipboard unavailable — no-op
+    }
+  };
+
+  return (
+    <button type="button" onClick={handleCopy} className="text-left group cursor-pointer">
+      <div className={`${className} h-28 rounded-xl relative overflow-hidden transition-transform group-hover:scale-[1.02]`}>
+        {copied && (
+          <span className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-sm font-medium">
+            Copied!
+          </span>
+        )}
+      </div>
+      <p className="mt-3 font-semibold">{name}</p>
+      <p className="text-sm font-light opacity-70">{hex}</p>
+      <code className="text-xs font-light opacity-50">{token}</code>
+    </button>
+  );
+}
 
 function Section({ title, children, dark, backdrop, backdropOpacity = 0.07 }) {
   return (
@@ -44,7 +80,7 @@ export default function StyleGuide() {
       {/* Logo */}
       <Section title="Logo" backdrop="/assets/icon-dark-transparent.svg">
         <p className="text-sm font-light opacity-70 mb-8">
-          Four approved background colours, each with three logo variants. No other combinations are permitted.
+          Four approved background colours, each with three logo variants.
         </p>
 
         {/* Column headers */}
@@ -101,6 +137,54 @@ export default function StyleGuide() {
             ))}
           </div>
         ))}
+
+        {/* Logo treatments */}
+        <h3 className="text-lg font-semibold mt-12 mb-2 border-t border-current/10 pt-10">Logo treatments</h3>
+        <p className="text-sm font-light opacity-70 mb-6">
+          The full logo on a transparent background, for use over photography, colour blocks, or other UI elements.
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {logoTreatments.map(({ name, suffix, swatch }) => (
+            <div key={suffix} className="flex flex-col gap-2">
+              <div className={`${swatch} rounded-xl overflow-hidden aspect-[3/2] flex items-center justify-center p-3 border border-navy/10`}>
+                <img
+                  src={`/assets/logo-${suffix}-transparent.svg`}
+                  alt={`Logo treatment — ${name}`}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-light opacity-70">{name}</p>
+                <div className="flex gap-2">
+                  <a
+                    href={`/assets/logo-${suffix}-transparent.svg`}
+                    download={`tcg-logo-${suffix}-transparent.svg`}
+                    className="text-xs font-medium px-3 py-1 rounded-full border border-navy/20 text-navy/60 hover:border-navy/50 hover:text-navy transition-colors"
+                  >
+                    SVG
+                  </a>
+                  <a
+                    href={`/assets/logo-${suffix}-transparent.png`}
+                    download={`tcg-logo-${suffix}-transparent.png`}
+                    className="text-xs font-medium px-3 py-1 rounded-full border border-navy/20 text-navy/60 hover:border-navy/50 hover:text-navy transition-colors"
+                  >
+                    PNG
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Colours */}
+      <Section title="Colours">
+        <p className="text-sm font-light opacity-70 mb-8">Click the box to copy to clipboard.</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {colours.map(({ name, hex, token, className }) => (
+            <ColourSwatch key={token} name={name} hex={hex} token={token} className={className} />
+          ))}
+        </div>
       </Section>
 
       {/* Brand Shapes */}
@@ -129,18 +213,18 @@ export default function StyleGuide() {
           </div>
           <div className="text-center">
             <div className="bg-sand/10 rounded-xl p-8 flex items-center justify-center h-48">
-              <img src="/assets/shape-semicircle.svg" alt="Semicircle" className="spin-cw w-32 h-32"
+              <img src="/assets/shape-circle.svg" alt="Circle" className="spin-cw w-32 h-32"
                 style={{ filter: 'brightness(0) saturate(100%) invert(82%) sepia(30%) saturate(500%) hue-rotate(345deg)' }} />
             </div>
-            <p className="mt-3 font-semibold">Semicircle</p>
-            <p className="text-sm font-light opacity-70">298&times;297, large arch</p>
+            <p className="mt-3 font-semibold">Circle</p>
+            <p className="text-sm font-light opacity-70">298&times;297, circle</p>
           </div>
           <div className="text-center">
             <div className="bg-sand/10 rounded-xl p-8 flex items-center justify-center h-48">
-              <img src="/assets/icon-light-transparent.svg" alt="Icon mark" className="h-28 w-auto" />
+              <img src="/assets/icon-light-outline.svg" alt="Icon outline" className="h-28 w-auto" />
             </div>
-            <p className="mt-3 font-semibold">Icon mark</p>
-            <p className="text-sm font-light opacity-70">519&times;557, full brand mark</p>
+            <p className="mt-3 font-semibold">Icon outline</p>
+            <p className="text-sm font-light opacity-70">519&times;557, outline mark</p>
           </div>
         </div>
 
@@ -150,20 +234,6 @@ export default function StyleGuide() {
             <div key={name} className="flex items-center gap-2">
               <div className={`w-4 h-4 rounded ${className}`} />
               <span className="text-xs font-light opacity-70">{name}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Colours */}
-      <Section title="Colours">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {colours.map(({ name, hex, token, className }) => (
-            <div key={token}>
-              <div className={`${className} h-28 rounded-xl`} />
-              <p className="mt-3 font-semibold">{name}</p>
-              <p className="text-sm font-light opacity-70">{hex}</p>
-              <code className="text-xs font-light opacity-50">{token}</code>
             </div>
           ))}
         </div>
@@ -289,7 +359,7 @@ export default function StyleGuide() {
       {/* Hero */}
       <Section title="Hero">
         <p className="text-sm font-light opacity-70 mb-8">
-          Navy background with real brand shapes (square, arch, semicircle) rotating continuously.
+          Navy background with real brand shapes (square, arch, circle) rotating continuously.
         </p>
         <div className="rounded-xl overflow-hidden">
           <Hero
